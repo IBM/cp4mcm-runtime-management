@@ -1,0 +1,71 @@
+---
+apiVersion: cp4mcmruntimes.management.ibm.com/v1
+kind: Cp4mcmruntime
+metadata:
+  name: mqruntime-mq
+  namespace: default
+spec:
+  description: MQ Offers..... Description
+  displayName: IBM MQ
+  search:
+    cluster-based:
+      kind: statefulset
+      label: "app=ibm-mq"
+    vm-based:
+      label: "app=ibm_mq"
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        fields:
+        - uid
+        - clusterName
+        - ibmmq_service_namespace
+        - ibmmq_service_name
+        - ibmmq_qmgr_name
+        join:
+          cluster: clusterName
+          name: ibmmq_service_name
+          namespace: ibmmq_service_namespace
+        resourceType: ibmmq_qm
+      columns:
+      - displayName: Overview
+        items:
+          Queue Manager Name: ibmmq_qmgr_name
+        source: applicationmgmt
+      - displayName: Activity
+        items:
+          Total Connections: ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
+          Total GET (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
+          Total GET (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
+          Total PUT/PUT1 (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
+          Total PUT/PUT1 (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
+      columns:
+      - displayName: Overview
+        items:
+          Queue Manager Name: ibmmq_qmgr_name
+        source: applicationmgmt
+      - displayName: Activity
+        items:
+          Total Connections: ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
+          Total GET (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
+          Total GET (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
+          Total PUT/PUT1 (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
+          Total PUT/PUT1 (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
+        source: metric
+      - displayName: Performance
+        items:
+          File System Free: ibmmq_qmgr-ibmmq_qmgr_queue_manager_file_system_free_space_percentage
+          RAM Free: ibmmq_qmgr-ibmmq_qmgr_ram_free_percentage
+          System CPU: ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
+          User CPU: ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
+        source: metric
+      metric:
+        metrics:
+        - ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
+        - ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
+        - ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
+        - ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
+        - ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
+        - ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
+        - ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
+        - ibmmq_qmgr-ibmmq_qmgr_queue_manager_file_system_free_space_percentage
