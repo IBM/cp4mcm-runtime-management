@@ -1,11 +1,11 @@
 ---
-apiVersion: cp4mcmruntimes.management.ibm.com/v1
-kind: Cp4mcmruntime
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
 metadata:
   name: mqruntime-mq
   namespace: default
 spec:
-  description: MQ Offers ... TODO ... Description
+  description: MQ Offers..... Description
   displayName: IBM MQ
   search:
     cluster-based:
@@ -18,28 +18,40 @@ spec:
       columns:
         - displayName: Overview
           source: applicationmgmt
-          items:
-            Channel Initiator Status: channelInitiatorStatus
-            Command Server Status: commandServerStatus
-            Manager Status: managerStatus
+          columnItems:
+            - displayName: Channel Initiator Status
+              target: channelInitiatorStatus
+            - displayName: Command Server Status
+              target: commandServerStatus
+            - displayName: Manager Status
+              target: managerStatus
         - displayName: Connections
           source: metric
-          items:
-            Total Connections: connectionCount
-            Server Connections: serverConnections
+          columnItems:
+            - displayName: Total Connections
+              target: connectionCount
+            - displayName: Server Connections
+              target: serverConnections
         - displayName: Queues
           source: metric
-          items:
-            Queues with high depth: highDepthQueueCount
-            Dead letter queue depth: dlqDepth
-            Open Queues: openQueueCount
-            Total Messages: totalMessages
+          columnItems:
+            - displayName: Queues with high depth
+              target: highDepthQueueCount
+            - displayName: Dead letter queue depth
+              target: dlqDepth
+            - displayName: Open Queues
+              target: openQueueCount
+            - displayName: Total Messages
+              target: totalMessages
         - displayName: Channels
           source: metric
-          items:
-            Current Channel Connections Not Running: currentChannelConnectionsNotRunning
-            In doubt channel connections: inDoubtChannelConnections
-            Percent Maximum Channels: percentMaximumChannels
+          columnItems:
+            - displayName: Channel Connections Not Running
+              target: currentChannelConnectionsNotRunning
+            - displayName: In doubt channel connections
+              target: inDoubtChannelConnections
+            - displayName: Percent Maximum Channels
+              target: percentMaximumChannels
       applicationmgmt:
         join:
           host: hostName
@@ -54,22 +66,33 @@ spec:
         resourceType: ibmmq_qm
       columns:
       - displayName: Overview
-        items:
-          Queue Manager Name: ibmmq_qmgr_name
-          Queue Manager Status: ibmmq_qmgr_status
+        columnItems:
+          - displayName: Queue Manager Name
+            target: ibmmq_qmgr_name
+          - displayName: Queue Manager Status
+            target: ibmmq_qmgr_status
         source: applicationmgmt
       - displayName: Activity
-        items:
-          Total Connections: ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
-          Total GET (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
-          Total GET (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
-          Total PUT/PUT1 (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
-          Total PUT/PUT1 (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
+        columnItems:
+          - displayName: Total Connections
+            target: ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
+          - displayName: Total GET (non-persistent)
+            target: ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
+          - displayName: Total GET (persistent)
+            target: ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
+          - displayName: Total PUT/PUT1 (non-persistent)
+            target: ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
+          - displayName: Total PUT/PUT1 (persistent)
+            target: ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
         source: metric
       - displayName: Performance
-        items:
-          File System Free: ibmmq_qmgr-ibmmq_qmgr_queue_manager_file_system_free_space_percentage
-          RAM Free: ibmmq_qmgr-ibmmq_qmgr_ram_free_percentage
-          System CPU: ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
-          User CPU: ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
+        columnItems:
+          - displayName: File System Free Percent
+            target: ibmmq_qmgr-ibmmq_qmgr_queue_manager_file_system_free_space_percentage
+          - displayName: RAM Free Percent
+            target: ibmmq_qmgr-ibmmq_qmgr_ram_free_percentage
+          - displayName: System CPU
+            target: ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
+          - displayName: User CPU
+            target: ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
         source: metric
