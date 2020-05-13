@@ -5,23 +5,48 @@ metadata:
   name: mqruntime-mq
   namespace: default
 spec:
-  description: MQ Offers..... Description
+  description: MQ Offers ... TODO ... Description
   displayName: IBM MQ
   search:
     cluster-based:
       kind: statefulset
       label: "app=ibm-mq"
     vm-based:
-      label: "app=ibm_mq"
+      label: "app.management.ibm.com/ibm-mq=true"
   dynamicdetail:
+    vm-based:
+      columns:
+        - displayName: Overview
+          source: applicationmgmt
+          items:
+            Channel Initiator Status: channelInitiatorStatus
+            Command Server Status: commandServerStatus
+            Manager Status: managerStatus
+        - displayName: Connections
+          source: metric
+          items:
+            Total Connections: connectionCount
+            Server Connections: serverConnections
+        - displayName: Queues
+          source: metric
+          items:
+            Queues with high depth: highDepthQueueCount
+            Dead letter queue depth: dlqDepth
+            Open Queues: openQueueCount
+            Total Messages: totalMessages
+        - displayName: Channels
+          source: metric
+          items:
+            Current Channel Connections Not Running: currentChannelConnectionsNotRunning
+            In doubt channel connections: inDoubtChannelConnections
+            Percent Maximum Channels: percentMaximumChannels
+      applicationmgmt:
+        join:
+          host: hostName
+          name: managerName
+        resourceType: mqManager
     cluster-based:
       applicationmgmt:
-        fields:
-        - uid
-        - clusterName
-        - ibmmq_service_namespace
-        - ibmmq_service_name
-        - ibmmq_qmgr_name
         join:
           cluster: clusterName
           name: ibmmq_service_name
@@ -31,18 +56,7 @@ spec:
       - displayName: Overview
         items:
           Queue Manager Name: ibmmq_qmgr_name
-        source: applicationmgmt
-      - displayName: Activity
-        items:
-          Total Connections: ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
-          Total GET (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
-          Total GET (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
-          Total PUT/PUT1 (non-persistent): ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
-          Total PUT/PUT1 (persistent): ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
-      columns:
-      - displayName: Overview
-        items:
-          Queue Manager Name: ibmmq_qmgr_name
+          Queue Manager Status: ibmmq_qmgr_status
         source: applicationmgmt
       - displayName: Activity
         items:
@@ -59,13 +73,3 @@ spec:
           System CPU: ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
           User CPU: ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
         source: metric
-      metric:
-        metrics:
-        - ibmmq_qmgr-ibmmq_qmgr_mqconn_mqconnx_total
-        - ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
-        - ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
-        - ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
-        - ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
-        - ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
-        - ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
-        - ibmmq_qmgr-ibmmq_qmgr_queue_manager_file_system_free_space_percentage
