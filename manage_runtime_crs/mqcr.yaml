@@ -5,6 +5,7 @@ metadata:
   name: mqruntime-mq
   namespace: default
 spec:
+  displayName: IBM MQ
   description: Messaging and queueing middleware that supports several modes of operation including point-to-point, publish/subscribe, and file transfer exchange.
   search:
     cluster-based:
