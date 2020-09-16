@@ -1,0 +1,12 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: ibm-datapower-dev
+  namespace: kube-system
+spec:
+  displayName: IBM DataPower Gateway (Dev)
+  description: Provides security, control, integration and optimized access to a full range of mobile, web, application programming interface (API), service-oriented architecture (SOA), B2B and cloud workloads
+  search:
+    cluster-based:
+      kind: deployment
+      label: helm.sh/chart=ibm-datapower-dev-3.1.2

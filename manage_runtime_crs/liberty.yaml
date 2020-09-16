@@ -1,0 +1,58 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: liberty-runtime
+  namespace: kube-system
+spec:
+  displayName: IBM WebSphere Liberty
+  description: Websphere Liberty pods with runtime=liberty label
+  search:
+    cluster-based:
+      kind: pod
+      label: runtime=liberty
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: podName
+          namespace: nameSpace
+        resourceType: webSphereApplicationServerLiberty
+      columns:
+      - displayName: Performance Overview
+        source: metric
+        columnItems:
+          - displayName: Application Request Response Time (ms)
+            target: latency
+          - displayName: Application Error Count
+            target: errorCount
+          - displayName: Application Error Rate (%)
+            target: errorRate
+          - displayName: Application Request Error Percentage
+            target: errorPercentage
+          - displayName: Request count
+            target: traffic
+          - displayName: Saturation
+            target: saturation (%)
+          - displayName: Application Throughput
+            target: throughput
+          - displayName: Application Average Service Response Time (ms)
+            target: averageServiceResponseTime
+      - displayName: JVM Performance
+        source: metric
+        columnItems:
+          - displayName: JVM CPU Used (%)
+            target: cpu
+          - displayName: JVM Memory Used (bytes)
+            target: jvm_usedMemory
+          - displayName: JVM Memory Total (bytes)
+            target: jvmMemoryTotal
+      - displayName: Thread Pool
+        source: metric
+        columnItems:
+          - displayName: Active Thread Count
+            target: threadPoolSummary_actThrCount
+          - displayName: Hung Threads Total
+            target: hungThrCount
+          - displayName: Thread Pool Size
+            target: threadPoolSummary_size

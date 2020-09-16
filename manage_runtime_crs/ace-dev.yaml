@@ -1,0 +1,88 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: ibm-ace-dev-runtime
+  namespace: kube-system
+spec:
+  displayName: IBM App Connect Enterprise Server (Dev)
+  description: Integration solution that allows business information to flow between different applications across multiple hardware and software platforms
+  search:
+    cluster-based:
+      kind: deployment
+      label: app.kubernetes.io/name=ibm-ace-server-dev
+      links:
+      - kind: route
+        labels:
+          - app.kubernetes.io/name=ibm-ace-dashboard-dev
+        sameNamespace: true
+        matchWorkloadPrefix: false
+        containsName: ui
+        security: https
+        displayName: "ACE Dash UI"
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: ibmace_eg_kube_name
+          namespace: ibmace_eg_kube_namespace
+        resourceType: ibmace_eg
+      columns:
+      - displayName: About
+        columnItems:
+          - displayName: Status
+            target: ibmace_eg_status
+          - displayName: Version
+            target: ibmace_eg_version
+          - displayName: Queue Manager
+            target: ibmace_eg_qmgr
+          - displayName: Server Host
+            target: ibmace_eg_serverhost
+          - displayName: Instance
+            target: ibmace_eg_instance
+        source: applicationmgmt
+      - displayName: Overview
+        columnItems:
+          - displayName: Active Message Flows
+            target: ibmace_eg_activemsgflow
+          - displayName: Inactive Message Flows
+            target: ibmace_eg_inactivemsgflow
+          - displayName: Total Threads
+            target: ibmace_eg_threads_total
+          - displayName:  Message Flow Threads
+            target: ibmace_msgflow_threads_total
+          - displayName:  Commits
+            target: ibmace_msgflow_commits_total
+          - displayName:  Backouts
+            target: ibmace_msgflow_backouts_total
+          - displayName:  Messages
+            target: ibmace_msgflow_messages_total
+        source: metric
+      - displayName: Performance
+        columnItems:
+          - displayName:  CPU time seconds (avg)
+            target: ibmace_msgflow_cpu_time_seconds_avg
+          - displayName:  CPU time seconds (max)
+            target: ibmace_msgflow_cpu_time_seconds_max
+          - displayName:  Elapsed time seconds (avg)
+            target: ibmace_msgflow_elapsed_time_seconds_avg
+          - displayName:  Elapsed time seconds (max)
+            target: ibmace_msgflow_elapsed_time_seconds_max
+          - displayName:  Message bytes (avg)
+            target: ibmace_msgflow_messages_bytes_avg
+          - displayName:  Message bytes (max)
+            target: ibmace_msgflow_messages_bytes_max
+        source: metric
+      - displayName: Errors
+        columnItems:
+          - displayName: Total Errors
+            target: ibmace_eg_errors_total
+          - displayName: Messages with Error
+            target: ibmace_eg_messages_with_error_total
+          - displayName: MQ Errors Total
+            target: ibmace_eg_mq_errors_total
+          - displayName:  Message Flow Errors
+            target: ibmace_msgflow_errors_total
+          - displayName:  Message Flow Messages w/ Error Total
+            target: ibmace_msgflow_messages_with_error_total
+        source: metric

@@ -1,0 +1,56 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: go-runtime
+  namespace: kube-system
+spec:
+  displayName: Go Application Runtime
+  description: Go applications in IBM Cloud Private and local Go applications
+  search:
+    cluster-based:
+      kind: pod
+      label: runtime=go # manually added label to pod
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: podName
+          namespace: namespace
+        resourceType: goApplicationRuntime
+      columns:
+      - displayName: Golden Signals
+        columnItems:
+          - displayName: Application Average Request Response Time (ms)
+            target: averageResponseTime
+          - displayName: Application Error Rate (%)
+            target: requestErrorRate
+          - displayName: Error Rate (%)
+            target: errorRate
+          - displayName: Throughput
+            target: traffic
+          - displayName: Saturation (%)
+            target: saturation
+        source: metric
+      - displayName: Memory
+        columnItems:
+          - displayName: Total System Memory (MB)
+            target: sysMemoryAll
+          - displayName: Available System Memory (MB)
+            target: sysMemoryAvailable
+          - displayName: Used System Memory (MB)
+            target: sysMemoryUsed
+        source: metric
+      - displayName: Performance (Other)
+        source: metric
+        columnItems:
+          - displayName: Garbage Collection Count
+            target: numGC
+          - displayName: Heap In Use (MB)
+            target: heapInuse
+          - displayName: Heap System (MB)
+            target: heapSys
+          - displayName: Go Routine Count
+            target: goroutineCount
+          - displayName: Mutex Count
+            target: mutexCount

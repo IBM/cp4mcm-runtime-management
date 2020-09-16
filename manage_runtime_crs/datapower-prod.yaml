@@ -1,0 +1,12 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: ibm-datapower-prod
+  namespace: kube-system
+spec:
+  displayName: IBM DataPower Gateway (Prod)
+  description: Provides security, control, integration and optimized access to a full range of mobile, web, application programming interface (API), service-oriented architecture (SOA), B2B and cloud workloads
+  search:
+    cluster-based:
+      kind: deployment
+      label: helm.sh/chart=ibm-datapower-icp4i-1.0.6

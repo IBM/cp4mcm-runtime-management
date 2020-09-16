@@ -1,0 +1,44 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: nginx-runtime
+  namespace: kube-system
+spec:
+  displayName: Nginx Server
+  description: High-performance HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server
+  search:
+    cluster-based:
+      kind: daemonset
+      label: app.kubernetes.io/name=nginx-ingress
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: controllerName # to be added via UA
+          namespace: namespace # to be added via UA
+        resourceType: NginxServer
+      columns:
+      - displayName: Accepts Handled
+        source: metric
+        columnItems:
+          - displayName: Accepted Connections
+            target: nginx-accepts
+          - displayName: Handled Connections
+            target: nginx-handled
+      - displayName: Connections
+        source: metric
+        columnItems:
+          - displayName: Active Connections
+            target: nginx-active
+          - displayName: Waiting Connections
+            target: nginx-waiting
+          - displayName: Writing Connections
+            target: nginx-writing
+          - displayName: Reading Connections
+            target: nginx-reading
+      - displayName: Requests
+        source: metric
+        columnItems:
+          - displayName: Total Requests
+            target: nginx-requests

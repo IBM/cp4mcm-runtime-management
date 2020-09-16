@@ -1,0 +1,60 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: redis-runtime
+  namespace: kube-system
+spec:
+  displayName: Redis
+  description: In-memory data structure store, used as a database, cache and message broker
+  search:
+    cluster-based:
+      kind: statefulset
+      label: "app.kubernetes.io/name=redis"
+      links:
+      - kind: route
+        labels:
+          - app.kubernetes.io/name=redis-commander
+        sameNamespace: true
+        matchWorkloadPrefix: false
+        security: http
+        displayName: "Redis Commander UI"
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName #to define in metadata
+          name: workloadName #to define in metadata
+          namespace: namespace #to define in metadata
+        resourceType: RedisServer
+      columns:
+      - displayName: Overview
+        columnItems:
+          - displayName: Server Name
+            target: server
+          - displayName: Host
+            target: host
+        source: applicationmgmt
+      - displayName: Keyspace
+        columnItems:
+          - displayName: Keyspace Hitrate
+            target: redis-keyspace_hitrate
+          - displayName: Keyspace Hits
+            target: redis-keyspace_hits
+          - displayName: Keyspace Misses
+            target: redis-keyspace_misses
+        source: metric
+      - displayName: Activity
+        columnItems:
+          - displayName: Client Count
+            target: redis-clients
+          - displayName: Key Count
+            target: redis-keys
+          - displayName: Total Connections Received
+            target: redis-total_connections_received
+          - displayName: Rejected Connections
+            target: redis-rejected_connections
+          - displayName: Number of commands processed per second
+            target: redis-instantaneous_ops_per_sec
+          - displayName: Connected Slaves
+            target: redis-connected_slaves
+        source: metric

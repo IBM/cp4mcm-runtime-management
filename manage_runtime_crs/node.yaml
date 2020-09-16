@@ -1,0 +1,49 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: nodejs-runtime
+  namespace: kube-system
+spec:
+  displayName: Node.js Application Runtime
+  description: Node.js pods with runtime=node label
+  search:
+    cluster-based:
+      kind: pod
+      label: runtime=node # manually added label to pod
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: podName
+          namespace: namespace
+        resourceType: nodeApplicationRuntime
+      columns:
+      - displayName: Golden Signals
+        source: metric
+        columnItems:
+          - displayName: Application Request Response Time (ms)
+            target: latency
+          - displayName: Error Rate (%)
+            target: errorRate
+          - displayName: Application Error Rate (%)
+            target: requestErrorRate
+          - displayName: Throughput
+            target: traffic
+          - displayName: Saturation (%)
+            target: saturation
+      - displayName: Performance Overview
+        source: metric
+        columnItems:
+          - displayName: System CPU (%)
+            target: sysCpuPercentage
+          - displayName: Service CPU (%)
+            target: cpuPercentage
+          - displayName: Total System Memory (MB)
+            target: sysMemoryAll
+          - displayName: System Memory Free (MB)
+            target: sysMemoryFree
+          - displayName: Virtual Memory (MB)
+            target: virtualMemory
+          - displayName: Slowest Response Time (ms)
+            target: slowestResponseTime
