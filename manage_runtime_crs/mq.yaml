@@ -12,7 +12,7 @@ spec:
       applicationmgmt:
         join:
           cluster: clusterName
-          name: ibmmq_service_name
+          name: workload
           namespace: namespace
         resourceType: ibmmq_qm
       columns:
