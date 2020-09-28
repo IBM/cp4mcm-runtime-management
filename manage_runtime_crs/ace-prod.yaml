@@ -31,8 +31,8 @@ spec:
       applicationmgmt:
         join:
           cluster: clusterName
-          name: ibmace_eg_kube_name
-          namespace: ibmace_eg_kube_namespace
+          name: workload
+          namespace: namespace
         resourceType: ibmace_eg
       columns:
       - displayName: About
