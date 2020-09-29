@@ -15,7 +15,7 @@ spec:
       applicationmgmt:
         join:
           cluster: clusterName
-          name: workloadName
+          name: workload
           namespace: namespace
         resourceType: ibmapic
       columns:
