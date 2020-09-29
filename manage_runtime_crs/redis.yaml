@@ -22,9 +22,9 @@ spec:
     cluster-based:
       applicationmgmt:
         join:
-          cluster: clusterName #to define in metadata
-          name: workloadName #to define in metadata
-          namespace: namespace #to define in metadata
+          cluster: clusterName
+          name: workload
+          namespace: namespace
         resourceType: RedisServer
       columns:
       - displayName: Overview
