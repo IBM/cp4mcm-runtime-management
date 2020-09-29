@@ -15,8 +15,8 @@ spec:
       applicationmgmt:
         join:
           cluster: clusterName
-          name: controllerName # to be added via UA
-          namespace: namespace # to be added via UA
+          name: workload
+          namespace: namespace
         resourceType: NginxServer
       columns:
       - displayName: Accepts Handled
