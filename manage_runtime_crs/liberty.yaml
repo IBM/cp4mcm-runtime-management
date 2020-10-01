@@ -16,7 +16,7 @@ spec:
         join:
           cluster: clusterName
           name: podName
-          namespace: nameSpace
+          namespace: namespace
         resourceType: webSphereApplicationServerLiberty
       columns:
       - displayName: Performance Overview
