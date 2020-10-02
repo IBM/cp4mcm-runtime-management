@@ -19,13 +19,6 @@ spec:
         containsName: ui
         security: https
         displayName: "ACE Dash UI"
-      - kind: route
-        labels:
-          - app.kubernetes.io/name=ibm-app-connect-designer-icp4i
-        sameNamespace: true
-        matchWorkloadPrefix: false
-        security: https
-        displayName: "ACE Designer"
   dynamicdetail:
     cluster-based:
       applicationmgmt:
