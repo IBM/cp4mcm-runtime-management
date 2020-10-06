@@ -1,0 +1,111 @@
+# to be tested on environment with UA enhancements (issue 13118)
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: mqruntime-mq
+  namespace: kube-system
+spec:
+  description: 'Messaging and queuing middleware, with several modes of operation: point-to-point, publish/subscribe, and file transfer. Applications can publish messages to many subscribers over multicast.'
+  displayName: IBM MQ
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: workload
+          namespace: namespace
+        resourceType: ibmmq_qm
+      columns:
+      - columnItems:
+        - displayName: Queue Manager Name
+          target: ibmmq_qmgr_name
+        - displayName: Queue Manager Status
+          target: ibmmq_qmgr_status
+        displayName: Overview
+        source: applicationmgmt
+      - columnItems:
+        - displayName: Queue Manager Connection Count
+          target: connectionCount
+        - displayName: Server Connection Count
+          target: serverConnections
+        - displayName: Total GET (non-persistent)
+          target: ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_destructive_get_total
+        - displayName: Total GET (persistent)
+          target: ibmmq_qmgr-ibmmq_qmgr_persistent_message_destructive_get_total
+        - displayName: Total PUT/PUT1 (non-persistent)
+          target: ibmmq_qmgr-ibmmq_qmgr_non_persistent_message_put_put1_total
+        - displayName: Total PUT/PUT1 (persistent)
+          target: ibmmq_qmgr-ibmmq_qmgr_persistent_message_put_put1_total
+        displayName: Activity
+        source: metric
+      - columnItems:
+        - displayName: High Depth Queue Count
+          target: highDepthQueueCount
+        - displayName: File System Free Percent
+          target: ibmmq_qmgr-ibmmq_qmgr_queue_manager_file_system_free_space_percentage
+        - displayName: RAM Free Percent
+          target: ibmmq_qmgr-ibmmq_qmgr_ram_free_percentage
+        - displayName: System CPU
+          target: ibmmq_qmgr-ibmmq_qmgr_system_cpu_time_estimate_for_queue_manager_percentage
+        - displayName: User CPU
+          target: ibmmq_qmgr-ibmmq_qmgr_user_cpu_time_estimate_for_queue_manager_percentage
+        displayName: Performance
+        source: metric
+    vm-based:
+      applicationmgmt:
+        join:
+          host: hostName
+          name: managerName
+        resourceType: mqManager
+      columns:
+      - columnItems:
+        - displayName: Channel Initiator Status
+          target: channelInitiatorStatus
+        - displayName: Command Server Status
+          target: commandServerStatus
+        - displayName: Manager Status
+          target: managerStatus
+        displayName: Overview
+        source: applicationmgmt
+      - columnItems:
+        - displayName: Total Connections
+          target: connectionCount
+        - displayName: Server Connections
+          target: serverConnections
+        displayName: Connections
+        source: metric
+      - columnItems:
+        - displayName: Queues with high depth
+          target: highDepthQueueCount
+        - displayName: Dead letter queue depth
+          target: dlqDepth
+        - displayName: Open Queues
+          target: openQueueCount
+        - displayName: Total Messages
+          target: totalMessages
+        displayName: Queues
+        source: metric
+      - columnItems:
+        - displayName: Channel Connections Not Running
+          target: currentChannelConnectionsNotRunning
+        - displayName: In doubt channel connections
+          target: inDoubtChannelConnections
+        - displayName: Percent Maximum Channels
+          target: percentMaximumChannels
+        displayName: Channels
+        source: metric
+  search:
+    cluster-based:
+      kind: statefulset
+      label: app=ibm-mq
+      links:
+        - kind: route
+          labels:
+            - app=ibm-mq
+          sameNamespace: true
+          matchWorkloadPrefix: true
+          containsName: ibm-mq-web
+          security: https
+          displayName: "MQ Console" 
+    vm-based:
+      label: app.management.ibm.com/ibm-mq=true

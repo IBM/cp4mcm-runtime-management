@@ -1,0 +1,47 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: python-runtime
+  namespace: kube-system
+spec:
+  displayName: Python Web Frameworks
+  description: Python pods with label runtime=python, using Django or Flask frameworks
+  search:
+    cluster-based:
+      kind: pod
+      label: runtime=python # manually added label to pod
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: podName
+          namespace: namespace
+        resourceType: pythonApplicationRuntime
+      columns:
+      - displayName: Golden Signals
+        source: metric
+        columnItems:
+          - displayName: Request Response Time (ms)
+            target: latency
+          - displayName: Application Requests per Minute
+            target: traffic
+          - displayName: Saturation (%)
+            target: saturations
+      - displayName: Performance Overview
+        source: metric
+        columnItems:
+          - displayName: CPU Usage (%)
+            target: CPU
+          - displayName: Total Physical Memory (Mb)
+            target: MEM_TOTAL
+          - displayName: Physical Memory Usage (RSS) (Mb)
+            target: MEM_RSS
+          - displayName: Virtual Machine Memory Usage (Mb)
+            target: MEM_VMS
+          - displayName: Total Thread Count
+            target: THR_CNT
+          - displayName: Active Thread Count
+            target: THR_ACTIVE_CNT
+          - displayName: Daemon Thread Count
+            target: THR_DAEMON_CNT

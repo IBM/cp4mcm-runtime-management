@@ -1,0 +1,51 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: apic-runtime
+  namespace: kube-system
+spec:
+  displayName: IBM API Connect
+  description: Scalable API platform that lets you create, securely expose, manage and monetize APIs across clouds.
+  search:
+    cluster-based:
+      kind: statefulset
+      label: app=ibm-apiconnect-icp4i-prod
+  dynamicdetail:
+    cluster-based:
+      applicationmgmt:
+        join:
+          cluster: clusterName
+          name: workload
+          namespace: namespace
+        resourceType: ibmapic
+      columns:
+      - displayName: Overview
+        source: applicationmgmt
+        columnItems:
+          - displayName: Cloud Name
+            target: cloud_name
+          - displayName: Service Type
+            target: service_type
+          - displayName: Cloud Manager Status
+            target: apic_status
+          - displayName: Kube Connection Status
+            target: kube_status
+      - displayName: Performance
+        source: metric
+        columnItems:
+          - displayName: Total CPU
+            target: ibmapic_kube-cluster_cpu
+          - displayName: Total Memory
+            target: ibmapic_kube-cluster_mem
+          - displayName: Abnormal Pods
+            target: ibmapic_kube-cluster_abpods
+          - displayName: Deployment Desired
+            target: ibmapic_deplmt-deployment_desired
+          - displayName: Deployment Available
+            target: ibmapic_deplmt-deployment_available
+          - displayName: Statefulset Desired
+            target: ibmapic_sts-statefulset_desired
+          - displayName: Statefulset Current
+            target: ibmapic_sts-statefulset_current
+          - displayName: Cronjob Active
+            target: ibmapic_cj-cronjob_active

@@ -1,0 +1,22 @@
+apiVersion: runtimes.management.ibm.com/v1
+kind: Runtime
+metadata:
+  name: hazelcast-runtime
+  namespace: kube-system
+spec:
+  displayName: Hazelcast
+  description: Open source in-memory data grid based on Java
+  search:
+    cluster-based:
+      kind: statefulset
+      label: app.kubernetes.io/name=hazelcast
+      links:
+      - kind: route
+        labels:
+          - app.kubernetes.io/name=hazelcast
+        sameNamespace: true
+        matchWorkloadPrefix: true
+        containsName: mancenter
+        security: http
+        displayName: "Hz Management Console"
+  
