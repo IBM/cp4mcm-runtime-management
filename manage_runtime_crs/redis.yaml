@@ -7,6 +7,8 @@ spec:
   displayName: Redis
   description: In-memory data structure store, used as a database, cache and message broker
   search:
+    vm-based:
+      label: app.management.ibm.com/redis=true
     cluster-based:
       kind: statefulset
       label: "app.kubernetes.io/name=redis"
@@ -19,6 +21,13 @@ spec:
         security: http
         displayName: "Redis Commander UI"
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:

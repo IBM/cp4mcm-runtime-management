@@ -7,10 +7,19 @@ spec:
   displayName: Python Web Frameworks
   description: Python pods with label runtime=python, using Django or Flask frameworks
   search:
+    vm-based:
+      label: app.management.ibm.com/python=true
     cluster-based:
       kind: pod
       label: runtime=python # manually added label to pod
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:

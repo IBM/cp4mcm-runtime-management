@@ -7,10 +7,19 @@ spec:
   displayName: Node.js Application Runtime
   description: Node.js pods with runtime=node label
   search:
+    vm-based:
+      label: app.management.ibm.com/node=true
     cluster-based:
       kind: pod
       label: runtime=node # manually added label to pod
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:
