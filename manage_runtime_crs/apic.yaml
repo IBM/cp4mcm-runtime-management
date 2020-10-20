@@ -7,10 +7,19 @@ spec:
   displayName: IBM API Connect
   description: Scalable API platform that lets you create, securely expose, manage and monetize APIs across clouds.
   search:
+    vm-based:
+      label: app.management.ibm.com/ibm-apic=true
     cluster-based:
       kind: statefulset
       label: app=ibm-apiconnect-icp4i-prod
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:

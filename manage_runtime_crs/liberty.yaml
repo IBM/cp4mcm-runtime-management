@@ -7,10 +7,19 @@ spec:
   displayName: IBM WebSphere Liberty
   description: Websphere Liberty pods with runtime=liberty label
   search:
+    vm-based:
+      label: app.management.ibm.com/liberty=true
     cluster-based:
       kind: pod
       label: runtime=liberty
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:

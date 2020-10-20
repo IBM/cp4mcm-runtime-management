@@ -7,6 +7,8 @@ spec:
   displayName: Hazelcast
   description: Open source in-memory data grid based on Java
   search:
+    vm-based:
+      label: app.management.ibm.com/hazelcast=true
     cluster-based:
       kind: statefulset
       label: app.kubernetes.io/name=hazelcast
@@ -19,4 +21,19 @@ spec:
         containsName: mancenter
         security: http
         displayName: "Hz Management Console"
-  
+  dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
+    cluster-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          cluster: dummy
+          name: dummy
+          namespace: dummy

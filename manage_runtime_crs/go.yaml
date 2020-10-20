@@ -7,10 +7,19 @@ spec:
   displayName: Go Application Runtime
   description: Go applications in IBM Cloud Private and local Go applications
   search:
+    vm-based:
+      label: app.management.ibm.com/go=true
     cluster-based:
       kind: pod
       label: runtime=go # manually added label to pod
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:

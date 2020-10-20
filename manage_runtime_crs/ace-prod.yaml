@@ -7,6 +7,8 @@ spec:
   displayName: IBM App Connect Enterprise Server (CP4I Prod)
   description: Integration solution that allows business information to flow between different applications across multiple hardware and software platforms
   search:
+    vm-based:
+      label: app.management.ibm.com/ibm-ace=true
     cluster-based:
       kind: deployment
       label: app.kubernetes.io/name=ibm-ace-server-icp4i-prod
@@ -20,6 +22,13 @@ spec:
         security: https
         displayName: "ACE Dash UI"
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:

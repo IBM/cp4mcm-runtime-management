@@ -7,10 +7,19 @@ spec:
   displayName: Nginx Server
   description: High-performance HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server
   search:
+    vm-based:
+      label: app.management.ibm.com/nginx=true
     cluster-based:
       kind: daemonset
       label: app.kubernetes.io/name=nginx-ingress
   dynamicdetail:
+    vm-based:
+      columns: []
+      applicationmgmt:
+        resourceType: dummy
+        join:
+          host: dummy
+          name: dummy
     cluster-based:
       applicationmgmt:
         join:
