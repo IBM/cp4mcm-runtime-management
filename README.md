@@ -2,15 +2,8 @@
 Repo for hosting runtime metadata
 
 ## 1.0 Overview
-TODO
+Runtime custom resources provide a way to define a customizable and central management pane  for workloads that run across VMs and Clusters in IBM's Cloud Pak for Multicloud Management (CP4MCM). For more information on the usage, prerequisites, and features provided through CP4MCM's Manage Runtime feature, please see the knowledge center documentation <>. For more information on how to create additional views beyond the ones included in this repository, see below.
 
-- Purpose
-  - Spec used to define custom grouping blah blah
-
-Prereqs:
-- Cloud Pak MCM w/ managed cluster s
-- Manage Runtimes feature enabled in installation
-- If you wish to show metrics through dynamic detail specifications,
 
 ## 2.0 Fields/Structure
 Define the below to **enable your runtime to show in the overview cards menu and show top level row data**, applications (for cluster based runtimes), and default links.
