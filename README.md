@@ -6,7 +6,7 @@ Runtime custom resources provide a way to define a customizable and central mana
 
 
 ## 2.0 Fields/Structure
-Define the below to **enable your runtime to show in the overview cards menu and show top level row data**, applications (for cluster based runtimes), and default links.
+Define the below to **enable your runtime to show in the overview cards menu and show top level row data** (see screenshots in the below section), applications (for cluster based runtimes), and default links.
 
 To see end to end examples, please see the existing Custom Resources provided in the  [manage_runtime_crs](manage_runtime_crs/) folder.
 
