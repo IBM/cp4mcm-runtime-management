@@ -38,7 +38,7 @@ An example of what this looks like in the console is depicted below (note all li
 ![IBM MQ Console Link (smaller view)](img/IBM%20MQ%20Console%20Link%20(smaller%20view).png)
 
 
-Please that **we current only support showing dynamic links for Openshift Routes**. We may extend this to support showing generic Kubernetes ingress paths in the future. If you are running on Openshift, and your workload exposes a service, but not a route, you may expose it via ```oc expose service yourServiceName -n yourServiceNamespace```
+Please note that **we current only support showing dynamic links for Openshift Routes**. We may extend this to support showing generic Kubernetes ingress paths in the future. If you are running on Openshift, and your workload exposes a service, but not a route, you may expose it via ```oc expose service yourServiceName -n yourServiceNamespace```
 
 The general form for a **single** link search criteria is as follows:
 
