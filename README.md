@@ -6,7 +6,13 @@ Runtime custom resources provide a way to define a customizable and central mana
 
 
 ## 2.0 Fields/Structure
-Define the below to **enable your runtime to show in the overview cards menu and show top level row data** (see screenshots in the below section), applications (for cluster based runtimes), and default links.
+Define the below to **enable your runtime to show in the overview cards menu and show top level row data**, applications (for cluster based runtimes), and default links.
+
+An example of what this looks like in the console menu is depicted below.
+
+![Runtimes Overview Page](img/RuntimesOverview.png)
+
+![IBM MQ Console Link (larger view)](img/IBM%20MQ%20Console%20Link%20(larger%20view).png)
 
 To see end to end examples, please see the existing Custom Resources provided in the  [manage_runtime_crs](manage_runtime_crs/) folder.
 
@@ -26,11 +32,10 @@ To see end to end examples, please see the existing Custom Resources provided in
 ### 2.1 Links
 The ```spec.search.cluster-based.links``` section can be used to describe external routes that you would like to expose on the Manage Runtimes User Interface. Here, you can specify 0-N routes that will appear in the overflow menu (accessible via the vertical ellipsis icon) of a runtime instance, if a respective route is found within the bounds of the search criteria for a specific instance.
 
-An example of what this looks like in the console is depicted below.
+An example of what this looks like in the console is depicted below (note all links will show under grey line in overview menu)
 
 ![IBM MQ Console Link (smaller view)](img/IBM%20MQ%20Console%20Link%20(smaller%20view).png)
 
-![IBM MQ Console Link (larger view)](img/IBM%20MQ%20Console%20Link%20(larger%20view).png)
 
 Please that **we current only support showing dynamic links for Openshift Routes**. We may extend this to support showing generic Kubernetes ingress paths in the future. If you are running on Openshift, and your workload exposes a service, but not a route, you may expose it via ```oc expose service yourServiceName -n yourServiceNamespace```
 
