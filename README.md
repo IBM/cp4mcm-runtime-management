@@ -1,5 +1,5 @@
 # cp4mcm-runtime-management
-Repo for hosting runtime metadata
+Repository hosting IBM Cloud Pak for Multicloud Management Manage Runtime metadata
 
 ## 1.0 Overview
 Runtime custom resources provide a way to define a customizable and central management pane  for workloads that run across VMs and Clusters in IBM's Cloud Pak for Multicloud Management (CP4MCM). For more information on the usage, prerequisites, and features provided through CP4MCM's Manage Runtime feature, please see the knowledge center documentation <>. For more information on how to create additional views beyond the ones included in this repository, see below.
@@ -8,15 +8,15 @@ Runtime custom resources provide a way to define a customizable and central mana
 ## 2.0 Fields/Structure
 Define the below to **enable your runtime to show in the overview cards menu and show top level row data**, applications (for cluster based runtimes), and default links.
 
-To see end to end examples, please see the existing Custom Resources provided in <TODO: add relative link>
+To see end to end examples, please see the existing Custom Resources provided in the  [manage_runtime_crs](manage_runtime_crs/) folder.
 
 
 | Field | description | Required | Form |
 | ----- | ----------- | ---------| ------ |
 | metadata.name | Name of your runtime CR | Y | string |
 | metadata.namespace | Namespace | Y | string |
-| spec.displayName | Name of your runtime. To be used in display cards on landing page | Y | string |
-| spec.description | Description to be used in the . To be used in display cards on landing page | Y | string |
+| spec.displayName | Name of your runtime to be used in display cards on landing page | Y | string |
+| spec.description | Description to be used in the display cards on landing page  | Y | string |
 | spec.search.X where X is cluster-based and/or vm-based | More below | Y. One or both of spec.search.vm-based and spec.search.cluster-based must be defined. More below | Object. More below |
 | spec.search.X.label where X is vm-based or cluster-based | Kubernetes label=value that can be used to determine Kubernetes resources that are of your runtime type | Y | string. Example: "app.management.ibm.com/ibm-mq=true" |
 | spec.search.X.kind where X is vm-based or cluster-based | Kubernetes type that represent the top level resource of your runtime. Follows MCM Search object types (you can test/explore types using MCM Search UI)| Y | string. singular. Example: "statefulset" |
@@ -24,11 +24,13 @@ To see end to end examples, please see the existing Custom Resources provided in
 
 
 ### 2.1 Links
-The ```spec.search.cluster-based.links``` section can be used to describe external routes that you would like to expose on the Manage Runtimes User Interface. Here, you can specify 0-N routes that will appear in the <Name of "..." widget> of a runtime instance, if a respective route is found within the bounds of the search criteria for a specific instance <TODO: better wording> .
+The ```spec.search.cluster-based.links``` section can be used to describe external routes that you would like to expose on the Manage Runtimes User Interface. Here, you can specify 0-N routes that will appear in the "Additional information" overflow menu (accessible via the vertical ellipsis icon) <rename this portion?> of a runtime instance, if a respective route is found within the bounds of the search criteria for a specific instance <TODO: better wording> .
 
-An example of what this looks like in the UI is depicted below.
+An example of what this looks like in the console is depicted below.
 
-<PIC OF Console>
+![IBM MQ Console Link (smaller view)](img/IBM%20MQ%20Console%20Link%20(smaller%20view).png)
+
+![IBM MQ Console Link (larger view)](img/IBM%20MQ%20Console%20Link%20(larger%20view).png)
 
 Please that **we current only support showing dynamic links for Openshift Routes**. We may extend this to support showing generic Kubernetes ingress paths in the future. If you are running on Openshift, and your workload exposes a service, but not a route, you may expose it via ```oc expose service yourServiceName -n yourServiceNamespace```
 
