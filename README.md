@@ -24,7 +24,7 @@ To see end to end examples, please see the existing Custom Resources provided in
 
 
 ### 2.1 Links
-The ```spec.search.cluster-based.links``` section can be used to describe external routes that you would like to expose on the Manage Runtimes User Interface. Here, you can specify 0-N routes that will appear in the "Additional information" overflow menu (accessible via the vertical ellipsis icon) <rename this portion?> of a runtime instance, if a respective route is found within the bounds of the search criteria for a specific instance <TODO: better wording> .
+The ```spec.search.cluster-based.links``` section can be used to describe external routes that you would like to expose on the Manage Runtimes User Interface. Here, you can specify 0-N routes that will appear in the overflow menu (accessible via the vertical ellipsis icon) of a runtime instance, if a respective route is found within the bounds of the search criteria for a specific instance.
 
 An example of what this looks like in the console is depicted below.
 
