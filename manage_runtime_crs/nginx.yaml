@@ -23,7 +23,7 @@ spec:
     cluster-based:
       applicationmgmt:
         join:
-          cluster: clusterName
+          cluster: cluster
           name: workload
           namespace: namespace
         resourceType: NginxServer
