@@ -13,7 +13,7 @@ An example of what this looks like in the Overview Menu and instance detail page
 ![Runtimes Overview Page](img/RuntimeOverview.png)
 
 
-![IBM MQ Console Link (larger view)](img/IBM%20MQ%20Console%20Link%20(larger%20view).png)
+![IBM MQ Console Link (larger view)](img/RuntimeDetailLarge.png)
 
 To see end to end examples, please see the existing Custom Resources provided in the  [manage_runtime_crs](manage_runtime_crs/) folder.
 
