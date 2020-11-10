@@ -8,7 +8,7 @@ Runtime custom resources provide a way to define a customizable and central mana
 ## 2.0 Fields/Structure
 Define the below to **enable your runtime to show in the overview cards menu and show top level row data, applications (for cluster based runtimes), and default links**.
 
-An example of what this looks like in the Overview Menu and instance detail page is depicted below.
+An example of what this looks like in the Overview Menu and instance detail page (for IBM MQ) is depicted below.
 
 ![Runtimes Overview Page](img/RuntimeOverview.png)
 
