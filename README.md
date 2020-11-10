@@ -2,7 +2,7 @@
 Repository hosting IBM Cloud Pak for Multicloud Management Manage Runtime metadata
 
 ## 1.0 Overview
-Runtime custom resources provide a way to define a customizable and central management pane  for workloads that run across VMs and Clusters in IBM's Cloud Pak for Multicloud Management (CP4MCM). For more information on the usage, prerequisites, and features provided through CP4MCM's Manage Runtime feature, please see the knowledge center documentation <>. For more information on how to create additional views beyond the ones included in this repository, see below.
+Runtime custom resources provide a way to define a customizable and central management pane  for workloads that run across VMs and Clusters in IBM's Cloud Pak for Multicloud Management (CP4MCM). For more information on the usage, prerequisites, and features provided through CP4MCM's Manage Runtime feature, please see the ![Knowledge Center documentation](https://www.ibm.com/support/knowledgecenter/en/SSFC4F_2.2.0/kc_welcome_cloud_pak.html). For more information on how to create additional views beyond the ones included in this repository, see below.
 
 
 ## 2.0 Fields/Structure
